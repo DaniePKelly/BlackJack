@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>Black Jack</title>
+    <script type="text/javascript">
+        
+        var suits = ["Spades","Clubs","Diamonds","Hearts"];
+        var numbers = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
+        var deck = new Array();
+        
+        function makeDeck(){
+            deck = new Array();
+            for(var i =0; i < numbers.length; i++){
+                for(var j = 0; j < suits.length; j++){
+                    var weight = parseInt(numbers[i]);
+                    if(numbers[i] == "J" || numbers[i] == "Q" || numbers[i] == "K" )
+                        weight = 10;
+                    if(numbers[i] == "A")
+                        weight = 11;
+                    var card = {Value: numbers[i], Suit: suits[j], Weight: weight};
+                    deck.push(card);
+                }    
+            }
+        }
+        function shuffleDeck(array){
+            for(let i = array.length -1; i>0;i--){
+                let j = Math.floor(Math.random() * (i+1));
+                let temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            return deck;
+            }
+        
+        window.onload = function(){
+            makeDeck();
+            shuffleDeck(deck);
+            console.log(deck);
+        }
+    </script>
+    <style type="text/css">
+        
+    </style>
+  </head>
+  <body>
+    <div class="game">
+        <div class="game">
+            <h3>Black Jack</h3>
+
+            <div class="game-body">
+                   <div class="game-options">
+                    <input type="button" id="start" class="btn" value="Start" onclick="startblackjack()">
+                    <input type="button" class="hit" value="Hit me" onclick="hitMe()">
+                    <input type="button" class="keep" value="Keep" onclick="stay()">
+                    </div>
+
+                        <div class="status" id="status"></div>
+
+                    <div id="deck" class="deck">
+                        <div id="deckcount">52</div>
+                    </div>
+
+                    <div id="players" class="players">
+                    </div>
+
+                    <div class="clear"></div>
+            </div>
+        </div>
+      </div>
+  </body>
+</html>
