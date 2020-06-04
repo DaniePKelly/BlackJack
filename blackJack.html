@@ -5,9 +5,15 @@
     <title>Black Jack</title>
     <script type="text/javascript">
         
+        
+        var gameStatus = false;
+        var playerStatus = 1;
+        var player = [];
+        var dealer = [];
         var suits = ["Spades","Clubs","Diamonds","Hearts"];
         var numbers = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
         var deck = new Array();
+        
         
         function makeDeck(){
             deck = new Array();
@@ -33,10 +39,62 @@
             return deck;
             }
         
-        window.onload = function(){
-            makeDeck();
+        function deal(deck,player,dealer){
+            
+            for(i=0; i <2; i++){
+                player.push(deck.pop());
+                dealer.push(deck.pop()); 
+                
+            }
+            console.log("Player" , player);
+            console.log("Dealer" , dealer);
+            
+        }
+        
+        function hitMe(deck,player){
+            array.push(deck.pop());
+        }
+        
+        function dealerDraw(deck,dealer){
+        }
+        
+        function cardWeight(player,dealer,){
+            var playerSum = 0;
+            var dealerSum = 0;
+            for(let i = 0; i < player.length; i++){
+                playerSum += player[i].Weight;
+                dealerSum += dealer[i].Weight;
+            }
+            console.log("Dealer Sum",dealerSum);
+            console.log("Player Sum",playerSum);
+            return playerSum;
+            
+            
+        }
+        
+               
+        
+        function playBlackJack(){
+            
             shuffleDeck(deck);
             console.log(deck);
+            deal(deck,player,dealer);
+            cardWeight(player,dealer);
+            
+            
+            
+            
+            
+                
+            
+            
+        }
+            
+        
+        window.onload = function(){
+            makeDeck();
+            
+            
         }
     </script>
     <style type="text/css">
@@ -50,7 +108,7 @@
 
             <div class="game-body">
                    <div class="game-options">
-                    <input type="button" id="start" class="btn" value="Start" onclick="startblackjack()">
+                    <input type="button" id="start" class="btn" value="Start" onclick="playBlackJack()">
                     <input type="button" class="hit" value="Hit me" onclick="hitMe()">
                     <input type="button" class="keep" value="Keep" onclick="stay()">
                     </div>
