@@ -5,14 +5,18 @@
     <title>Black Jack</title>
     <script type="text/javascript">
         
+        var $ = function(id) {
+            return document.getElementById(id);
+        };
         
-        var gameStatus = false;
         var playerStatus = 1;
-        var player = [];
-        var dealer = [];
+        var player = new Array();
+        var dealer = new Array();
         var suits = ["Spades","Clubs","Diamonds","Hearts"];
         var numbers = ["2","3","4","5","6","7","8","9","10","J","Q","K","A"];
         var deck = new Array();
+        var playerSum = 0;
+        var dealerSum = 0;
         
         
         function makeDeck(){
@@ -51,14 +55,55 @@
             
         }
         
-        function hitMe(deck,player){
-            array.push(deck.pop());
+        function hitMe(){
+            player.push(deck.pop());
+            console.log("Players hand after hit",player);
+            for(let i = 0; i < player.length; i++){
+                playerSum += player[i].Weight;                 
+            }
+            console.log(playerSum);
+            $("player").innerHTML = "Player:" + playerSum;
+            
+            if(playerSum == 21){
+                alert("Player Wins!");
+            }
+            else if(playerSum > 21){
+                alert("Player Bust Dealer Wins");
+            }
+            
         }
         
-        function dealerDraw(deck,dealer){
+        function stay(){
+            dealer.push(deck.pop());
+            console.log("Dealer Hand",dealer)
+            if( dealerSum <19){
+                for(let j = 0; j < dealer.length; j++){
+                    dealerSum += dealer[j].Weight;              
+                }      
+            }
+            
+            if( dealerSum == 21){
+                alert("Dealer Wins try again");
+            }
+            else if( playerSum > dealerSum){
+                alert("Player Wins!")
+            }
+            else if( dealerSum > 21){
+                alert("Dealer Bust, You Win!")    
+            }
+            else if( dealerSum > playerSum){
+                alert("Dealer Wins")    
+            }
+            else if( playerSum == dealerSum){
+                alert("Dealer Wins")
+            }
+            
+            $("dealer").innerHTML = "Dealer:"+dealerSum;
+            
         }
         
-        function cardWeight(player,dealer,){
+        /*
+        function cardWeight(player,dealer){
             var playerSum = 0;
             var dealerSum = 0;
             for(let i = 0; i < player.length; i++){
@@ -71,16 +116,36 @@
             
             
         }
-        
+        */
                
-        
         function playBlackJack(){
             
             shuffleDeck(deck);
             console.log(deck);
             deal(deck,player,dealer);
-            cardWeight(player,dealer);
+            var playerSum = 0;
+            var dealerSum = 0;
+            for(let i = 0; i < player.length; i++){
+                playerSum += player[i].Weight;                 dealerSum += dealer[i].Weight;
+            }
+            console.log("Dealer Sum",dealerSum);
+            console.log("Player Sum",playerSum);
             
+            if(playerSum == 21){
+                alert("Player wins!");
+            }
+            else if(playerSum > 21){
+                alert("Bust dealer wins");
+            }
+            else if(dealerSum == 21){
+                alert("Dealer wins");
+            }
+            else if(dealerSum > 21){
+                alert("Dealer bust Player wins");
+            }
+            
+            $("player").innerHTML = "Player:"+playerSum;
+            $("dealer").innerHTML = "Dealer:"+dealerSum;
             
             
             
@@ -115,11 +180,11 @@
 
                         <div class="status" id="status"></div>
 
-                    <div id="deck" class="deck">
-                        <div id="deckcount">52</div>
-                    </div>
+                    
 
-                    <div id="players" class="players">
+                    <div id="player">Player:0
+                    </div>
+                    <div id="dealer">Dealer:0
                     </div>
 
                     <div class="clear"></div>
