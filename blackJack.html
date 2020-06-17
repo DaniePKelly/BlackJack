@@ -101,9 +101,19 @@
             $("dealer").innerHTML = "Dealer:"+dealerSum;
             
         }
+        function reset(){
+            player = new Array();
+            dealer = new Array();
+            deck = new Array();
+            makeDeck();
+            playerSum = 0;
+            dealerSum = 0;
+            $("player").innerHTML = "Player:"+playerSum;
+            $("dealer").innerHTML = "Dealer:"+dealerSum;
+        }
         
         /*
-        function cardWeight(player,dealer){
+        function (player,dealer){
             var playerSum = 0;
             var dealerSum = 0;
             for(let i = 0; i < player.length; i++){
@@ -163,19 +173,73 @@
         }
     </script>
     <style type="text/css">
+        h1{
+            padding: 0px;
+            margin: 0px;
+            padding-left: 15px;
+            font-style: italic;
+            font-family: fantasy;
+            border-style: dashed;
+            border-bottom: none;
+            border-radius:24px;
+            background-color: grey;
+            color:white;
+            border-color: black;
+            
+        }
+        img{
+            width:125px;
+            height:50px;
+            padding-left: 30px;
+        }
+        .game-body{
+            border-style: dashed;
+            border-color: black;
+            background-color: grey;
+            padding: 2px;
+            border-radius:12px;
+            color:white;
+            font-family: fantasy;
+            }
+        #start{
+            background-color: black;
+            color: white;
+            border-radius: 8px;
+            font-family: fantasy;
+        }
+        #hit{
+            background-color: red;
+            color:white;
+            border-radius: 8px;
+            font-family: fantasy;
+        }
+        #keep{
+            background-color: black;
+            color: white;
+            border-radius: 8px;
+            font-family: fantasy;
+        }
+        #reset{
+            background-color: red;
+            color:white;
+            border-radius: 8px;
+            font-family: fantasy;
+        }
         
     </style>
   </head>
   <body>
     <div class="game">
         <div class="game">
-            <h3>Black Jack</h3>
+            <img src="assets/4_pips.jpg">
+            <h1>Black Jack</h1>
 
             <div class="game-body">
                    <div class="game-options">
                     <input type="button" id="start" class="btn" value="Start" onclick="playBlackJack()">
-                    <input type="button" class="hit" value="Hit me" onclick="hitMe()">
-                    <input type="button" class="keep" value="Keep" onclick="stay()">
+                    <input type="button" id ="hit" class="hit" value="Hit me" onclick="hitMe()">
+                    <input type="button" id="keep" class="keep" value="Keep" onclick="stay()">
+                    <input type="button" id="reset"class="reset" value="reset" onclick="reset()">
                     </div>
 
                         <div class="status" id="status"></div>
